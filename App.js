@@ -1,12 +1,28 @@
+// App.js
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import MainLayout from './src/components/layout/mainlayout';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './src/app/(defaultLayout)/(forum)/page';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <MainLayout>
+        <Stack.Navigator>
+          <Stack.Screen 
+            name="Home" 
+            component={Home} 
+            options={{ title: 'Home' }} // Título na barra de navegação
+          />
+          {/* Você pode adicionar outras telas aqui */}
+        </Stack.Navigator>
+        <StatusBar style="auto" />
+      </MainLayout>
+    </NavigationContainer>
   );
 }
 
