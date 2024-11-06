@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    'Geist': require('./assets/fonts/geist-sans-latin-200-normal.ttf'), // Carregue a fonte Geist
+    'Geist': require('./assets/fonts/geist-sans/geist-sans-latin-200-normal.ttf'), // Carregue a fonte Geist
   });
 
   if (!fontsLoaded) {
