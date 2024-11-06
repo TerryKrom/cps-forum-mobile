@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { dayjs } from "../../components/data/dayjs"; // Certifique-se de que a importação funcione em React Native
-import { Badge } from "../../components/ui/badge"; // Certifique-se de que o componente Badge seja compatível
 import { User } from "../../components/data/topic-data";
+import globalStyles from '../../globalStyles'; // Importe o estilo global
 
 export default function RecentTopic({ item }) {
     const author = User.find(user => user.id === item.userid);
@@ -14,13 +14,13 @@ export default function RecentTopic({ item }) {
         >
             <View style={styles.innerContainer}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{item.title}</Text>
+                   <Text style={[styles.title, globalStyles.text]}>{item.title}</Text>
                 </View>
                 <View style={styles.authorContainer}>
                     <TouchableOpacity onPress={() => {/* Navegação para o perfil do autor */}}>
-                        <Text style={styles.author}>{author.name}</Text>
+                        <Text style={[styles.author, globalStyles.text]}>{author.name}</Text>
                     </TouchableOpacity>
-                    <Text style={styles.date}>
+                    <Text style={[styles.date, globalStyles.text]}>
                         {dayjs(item.date).fromNow()}
                     </Text>
                 </View>

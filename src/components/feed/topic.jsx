@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Linking } from "react-native"
 import { dayjs } from "../../components/data/dayjs"; // Certifique-se de que essa função seja compatível com o React Native
 import { User } from "../../components/data/topic-data";
 import { Badge } from "../../components/ui/badge"; // Adapte a implementação do Badge para React Native
+import globalStyles from '../../globalStyles'; // Importe o estilo global
 
 export const Topic = ({ item }) => {
     const regex = /[^\p{L}\p{N}\s.,!?()-[\]]/giu;
@@ -16,24 +17,26 @@ export const Topic = ({ item }) => {
         >
             <View style={styles.header}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={[styles.title, globalStyles.text]}>{item.title}</Text>
                     {!item.read && <View style={styles.indicator} />}
                 </View>
-                <Text style={styles.date}>
+                <Text style={[styles.date, globalStyles.text]}>
                     {dayjs(item.date).fromNow()}
                 </Text>
             </View>
             <TouchableOpacity onPress={() => Linking.openURL(`/perfil/${author.id}/${author.slug}`)}>
-                <Text style={styles.author}>{author.name}</Text>
+                <Text style={[styles.author, globalStyles.text]}>{author.name}</Text>
             </TouchableOpacity>
-            <Text style={styles.body} numberOfLines={2}>
+            <Text style={[styles.body, globalStyles.text]} numberOfLines={2}>
                 {filteredBody.substring(0, 300)}
             </Text>
             {item.labels.length > 0 && (
                 <View style={styles.badgesContainer}>
                     {item.labels.map((label, i) => (
                         <Badge key={i} variant={getBadgeVariantFromLabel(label)}>
-                            <Text onPress={() => Linking.openURL(`/tag/${label}`)}>{label}</Text>
+                            <Text onPress={() => Linking.openURL(`/tag/${label}`)} style={globalStyles.text}>
+                                {label}
+                            </Text>
                         </Badge>
                     ))}
                 </View>
@@ -63,7 +66,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 14,
     },
     indicator: {
         height: 8,

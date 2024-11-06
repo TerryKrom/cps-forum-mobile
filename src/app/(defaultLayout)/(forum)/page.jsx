@@ -5,6 +5,7 @@ import { Topic } from '../../../components/data/topic-data';
 import PageTitle from '../../../components/layout/pagetitle';
 import dayjs from 'dayjs';
 import NewTopicButton from '../../../components/general/newtopic';
+import globalStyles from '../../../globalStyles'; // Importe o estilo global
 
 const Home = () => {
   const forumMessagesTopics = Topic.filter(topic => topic.section === 1);
@@ -15,18 +16,22 @@ const Home = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <PageTitle title="Home" />
-
       <Feed items={forumMessagesTopics} />
 
       {/* Tabs Component */}
       <View style={styles.tabsContainer}>
         <View style={styles.tabsList}>
-          <TouchableOpacity onPress={() => setActiveTab('relevant')} style={[styles.tabTrigger, activeTab === 'relevant' && styles.activeTab]}>
-            <Text style={activeTab === 'relevant' ? styles.activeTabText : styles.tabText}>Relevantes</Text>
+          <TouchableOpacity 
+            onPress={() => setActiveTab('relevant')} 
+            style={[styles.tabTrigger, activeTab === 'relevant' && styles.activeTab]}
+          >
+            <Text style={[globalStyles.text, activeTab === 'relevant' ? styles.activeTabText : styles.tabText]}>Relevantes</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setActiveTab('recent')} style={[styles.tabTrigger, activeTab === 'recent' && styles.activeTab]}>
-            <Text style={activeTab === 'recent' ? styles.activeTabText : styles.tabText}>Recentes</Text>
+          <TouchableOpacity 
+            onPress={() => setActiveTab('recent')} 
+            style={[styles.tabTrigger, activeTab === 'recent' && styles.activeTab]}
+          >
+            <Text style={[globalStyles.text, activeTab === 'recent' ? styles.activeTabText : styles.tabText]}>Recentes</Text>
           </TouchableOpacity>
         </View>
         <NewTopicButton />

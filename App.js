@@ -1,22 +1,32 @@
 // App.js
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
-import MainLayout from './src/components/layout/mainlayout';
+import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useFonts } from 'expo-font';
+import MainLayout from './src/components/layout/mainlayout';
 import Home from './src/app/(defaultLayout)/(forum)/page';
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'Geist': require('./assets/fonts/geist-sans-latin-200-normal.ttf'), // Carregue a fonte Geist
+  });
+
+  if (!fontsLoaded) {
+    return null; // Aguarda o carregamento da fonte
+  }
+
   return (
     <NavigationContainer>
       <MainLayout>
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen 
             name="Home" 
             component={Home} 
-            options={{ title: 'Home' }} // Título na barra de navegação
+            options={{ title: 'Home' }} 
           />
           {/* Você pode adicionar outras telas aqui */}
         </Stack.Navigator>
@@ -26,11 +36,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

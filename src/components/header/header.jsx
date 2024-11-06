@@ -64,6 +64,9 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: '#000',
     },
+    logo: {
+        height: 50, width: 100
+    }
 });
 
 export default Header;
