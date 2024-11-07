@@ -25,12 +25,6 @@ function Header() {
             <View style={styles.leftHeader}>
                 <MobileSidebar />
                 <Logo />
-                <TouchableOpacity style={styles.navItem} onPress={() => {/* lógica para abrir menu */}}>
-                    <Text style={styles.navText}>Fórum</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Materiais')}>
-                    <Text style={styles.navText}>Materiais</Text>
-                </TouchableOpacity>
             </View>
             <View style={styles.rightHeader}>
                 <AccountArea />

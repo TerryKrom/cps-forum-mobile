@@ -29,7 +29,7 @@ function AccountArea() {
       <AccountButton picurl={picurl} graphData={graphData} />
     ) : (
       <TouchableOpacity 
-        onPress={() => navigation.navigate('SignIn')} 
+        onPress={() => navigation.navigate('signin')} 
         style={{ height: 32, width: 150, justifyContent: 'center', alignItems: 'center' }}
       >
         <Text style={{ color: 'hsl(var(--foreground))' }}>Entre em sua conta</Text>

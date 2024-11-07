@@ -1,54 +1,101 @@
-'use client'
-
-import Image from "next/image"
-import Link from "next/link"
-import SignInButton from "@/components/signin/signinbutton"
-import { useIsAuthenticated } from "@azure/msal-react"
-import { redirect } from "next/navigation"
+import React, { useEffect } from 'react';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import SignInButton from '@/components/signin/signinbutton';
+import { useIsAuthenticated } from '@azure/msal-react';
 
 export default function AuthenticationPage() {
-    const isAuthenticated = useIsAuthenticated()
-    if (isAuthenticated) {
-        redirect('/')
-    }
+    const navigation = useNavigation();
+    const isAuthenticated = useIsAuthenticated();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigation.navigate('Home'); // Navega para a Home se autenticado
+        }
+    }, [isAuthenticated]);
 
     return (
-        <div className="relative h-screen grid grid-cols-[60%_minmax(30%,_1fr)] bg-cover bg-center bg-origin-content bg-[url(/bg404.png)] animated-bg screen">
-            <div className="relative hidden h-screen lg:flex flex-col">
-                <div className="absolute inset-0" />
-            </div>
-            <div className="grid lg:p-8 backdrop-blur-md bg-black/20 signin-container">
-                <div className="mx-auto flex w-full flex-col justify-center space-y-6 lg:w-[350px]">
-                    <div className="flex flex-col space-y-2 text-center text-white">
-                        <h1 className="text-2xl font-semibold tracking-tight">
-                            Entre em sua conta
-                        </h1>
-                        <p className="text-sm">
+        <View style={styles.container}>
+            <View style={styles.leftContainer}>
+                {/* Background ou imagem personalizada */}
+                <Image
+                    source={require('../../../assets/bg404.png')}
+                    style={StyleSheet.absoluteFill}
+                    resizeMode="cover"
+                />
+            </View>
+            <View style={styles.rightContainer}>
+                <View style={styles.signInContainer}>
+                    <View style={styles.header}>
+                        <Text style={styles.title}>Entre em sua conta</Text>
+                        <Text style={styles.subtitle}>
                             Para acessar o fórum, entre com seu e-mail institucional.
-                        </p>
-                    </div>
-                    <div className="signin-button-container">
+                        </Text>
+                    </View>
+                    <View style={styles.buttonContainer}>
                         <SignInButton />
-                    </div>
-                    <div className="px-4 text-center text-sm text-white">
+                    </View>
+                    <Text style={styles.termsText}>
                         Ao clicar em entrar, você concorda com os&nbsp;
-                        <Link
-                            href="/terms"
-                            className="hover:text-zinc-300 underline"
-                        >
-                            Termos de Uso
-                        </Link>
+                        <TouchableOpacity onPress={() => navigation.navigate('Terms')}>
+                            <Text style={styles.link}>Termos de Uso</Text>
+                        </TouchableOpacity>
                         &nbsp;e a&nbsp;
-                        <Link
-                            href="/privacy"
-                            className="hover:text-zinc-300 underline"
-                        >
-                            Política de Privacidade
-                        </Link>
+                        <TouchableOpacity onPress={() => navigation.navigate('Privacy')}>
+                            <Text style={styles.link}>Política de Privacidade</Text>
+                        </TouchableOpacity>
                         .
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+                    </Text>
+                </View>
+            </View>
+        </View>
+    );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    leftContainer: {
+        flex: 3,
+        display: 'none', // Oculta em telas pequenas
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    rightContainer: {
+        flex: 2,
+        padding: 20,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+    },
+    signInContainer: {
+        alignItems: 'center',
+    },
+    header: {
+        marginBottom: 20,
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: '600',
+        color: '#fff',
+    },
+    subtitle: {
+        fontSize: 14,
+        color: '#fff',
+        textAlign: 'center',
+    },
+    buttonContainer: {
+        marginVertical: 20,
+    },
+    termsText: {
+        fontSize: 12,
+        color: '#fff',
+        textAlign: 'center',
+        paddingHorizontal: 16,
+    },
+    link: {
+        color: '#a0aec0',
+        textDecorationLine: 'underline',
+    },
+});
