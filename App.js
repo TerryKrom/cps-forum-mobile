@@ -8,6 +8,8 @@ import MainLayout from './src/components/layout/mainlayout';
 import Home from './src/app/(defaultLayout)/(forum)/page';
 import Criar from './src/app/(defaultLayout)/criar/page';
 import AuthenticationPage from './src/app/sign-in/page';
+import Materiais from './src/app/(defaultLayout)/materiais/page';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -37,6 +39,11 @@ export default function App() {
             name="signin" // O nome da tela deve corresponder ao valor passado no NewTopicButton
             component={AuthenticationPage} 
             options={{ title: 'Sign In' }} 
+          />
+          <Stack.Screen
+            name="materiais" // O nome da tela deve corresponder ao valor passado no NewTopicButton
+            component={Materiais} 
+            options={{ title: 'Materiais' }} 
           />
         </Stack.Navigator>
         <StatusBar style="auto" />

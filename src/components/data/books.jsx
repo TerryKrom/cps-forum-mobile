@@ -373,10 +373,3 @@ export const LiteraryWorks = [
         editor: 'Moderna',
     },
 ]
-/** 
- * 
- * 
-
-
- * 
-*/

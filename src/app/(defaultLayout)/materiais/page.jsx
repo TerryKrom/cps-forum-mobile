@@ -1,9 +1,9 @@
 'use client';
 
-import BookRow from "@/components/materials/bookRow";
+import BookRow from "../../../components/materials/bookRow";
 import React from 'react';
 
-export default function Home() {
+export default function Materiais() {
     return (
         <>
             <BookRow slug={'home'} />

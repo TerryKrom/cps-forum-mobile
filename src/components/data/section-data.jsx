@@ -167,7 +167,7 @@ export const links = [
     {
         title: "Home",
         iconName: 'home',
-        slug: "",
+        slug: "Home",
     },
     {
         title: "Materiais",

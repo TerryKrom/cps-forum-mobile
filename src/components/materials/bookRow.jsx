@@ -1,24 +1,24 @@
-import React from 'react';
-import { HumanSciences, Languages, NatureSciences, SocialScienceAndMath, LiteraryWorks } from '@/components/data/books';
-import './bookRow.css';
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, ScrollView, Linking, StyleSheet } from 'react-native';
+import { HumanSciences, Languages, NatureSciences, SocialScienceAndMath, LiteraryWorks } from '../data/books';
 
 const BookRow = ({ slug }) => {
-    const [expandedItem, setExpandedItem] = React.useState(null);
+    const [expandedItem, setExpandedItem] = useState(null);
 
     const handleViewMore = (index) => {
         setExpandedItem(index);
-    }
+    };
 
     const handleViewLess = () => {
         setExpandedItem(null);
-    }
+    };
 
     const allBooks = [
+        ...LiteraryWorks,
         ...SocialScienceAndMath,
         ...Languages,
         ...HumanSciences,
-        ...NatureSciences,
-        ...LiteraryWorks,
+        ...NatureSciences
     ].sort();
 
     const bookdata = {
@@ -28,76 +28,109 @@ const BookRow = ({ slug }) => {
         'ciencias-sociais-e-matematica': SocialScienceAndMath,
         'obras-literarias': LiteraryWorks,
         'home': allBooks,
-    }
+    };
 
     const books = bookdata[slug];
 
     const renderBook = (book, index) => {
         return (
-            <div key={index} className="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
-                <div className="book max-w-sm border rounded-lg shadow bg-secondary">
-                    <div className="flex items-center justify-center">
-                        <a href={book.src} target="_blank" rel="noopener noreferrer">
-                            <img className="p-8 rounded-t-lg" src={book.cover} alt={book.title} />
-                        </a>
-                    </div>
-                    <div className="card-body px-3 pb-3">
-                        <a href="#">
-                            <h5 className="text-xl font-semibold tracking-tight text-foreground">{book.title}</h5>
-                            <h6 className="text-muted-foreground">{book.category}</h6>
-                        </a>
-                        <div className="text flex flex-col items-left mt-2.5 mb-5 text-secondary-foreground">
-                            <p className="leading-relaxed">
-                                {
-                                    book.desc.length > 200 ?
-                                        (
-                                            expandedItem === index ? book.desc : book.desc.slice(0, 200) + '...'
-                                        ) :
-                                        (
-                                            book.desc
-                                        )
-                                } &nbsp;
-                                {
-                                    book.desc.length > 200 &&
-                                    <button id={`toggle-btn-${index}`} className="toggle text-primary focus:outline-none" onClick={() => expandedItem === index ? handleViewLess() : handleViewMore(index)}>
-                                        {expandedItem === index ? 'Ler Menos' : 'Ler mais'}
-                                    </button>
-                                }
-                            </p>
-
-                            {book.desc.length > 200 && (
-                                <span id={`more-text-${index}`} className={expandedItem === index ? '' : 'hidden'}>
-                                    {book.desc.slice(200, 0)}
-                                </span>
-                            )}
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <a target='_blank' href={book.src} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full">Ver Mais</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <View key={index} style={styles.bookContainer}>
+                <TouchableOpacity onPress={() => Linking.openURL(book.src)}>
+                    <Image source={{ uri: book.cover }} style={styles.bookImage} />
+                </TouchableOpacity>
+                <View style={styles.cardBody}>
+                    <Text style={styles.bookTitle}>{book.title}</Text>
+                    <Text style={styles.bookCategory}>{book.category}</Text>
+                    <Text style={styles.bookDescription}>
+                        {book.desc.length > 200
+                            ? expandedItem === index
+                                ? book.desc
+                                : `${book.desc.slice(0, 200)}...`
+                            : book.desc}
+                        {book.desc.length > 200 && (
+                            <Text style={styles.toggleText} onPress={() => expandedItem === index ? handleViewLess() : handleViewMore(index)}>
+                                {expandedItem === index ? ' Ler Menos' : ' Ler Mais'}
+                            </Text>
+                        )}
+                    </Text>
+                    <TouchableOpacity style={styles.viewMoreButton} onPress={() => Linking.openURL(book.src)}>
+                        <Text style={styles.viewMoreText}>Ver Mais</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         );
     };
 
     return (
-        <div className="container my-6 mx-auto px-3 md:px-12">
-            <div className="flex flex-wrap -mx-1 lg:-mx-4">
-                {books.map((book, index) => {
-                    const columnIndex = Math.floor(index / 3);
-                    if (index % 3 === 0) {
-                        return (
-                            <React.Fragment key={index}>
-                                {renderBook(book, index)}
-                            </React.Fragment>
-                        );
-                    } else {
-                        return renderBook(book, index);
-                    }
-                })}
-            </div>
-        </div>
+        <ScrollView contentContainerStyle={styles.container}>
+            <View style={styles.row}>
+                {books.map((book, index) => renderBook(book, index))}
+            </View>
+        </ScrollView>
     );
-}
+};
+
+const styles = StyleSheet.create({
+    container: {
+        padding: 16,
+    },
+    row: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+    },
+    bookContainer: {
+        width: '48%',
+        marginVertical: 8,
+        borderWidth: 1,
+        borderColor: '#E0E0E0',
+        borderRadius: 10,
+        overflow: 'hidden',
+        backgroundColor: '#F8F8F8',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+    },
+    bookImage: {
+        width: '100%',
+        height: 150,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
+    },
+    cardBody: {
+        padding: 12,
+    },
+    bookTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#333',
+        marginBottom: 4,
+    },
+    bookCategory: {
+        fontSize: 14,
+        color: '#666',
+        marginBottom: 8,
+    },
+    bookDescription: {
+        fontSize: 14,
+        color: '#555',
+        marginBottom: 8,
+    },
+    toggleText: {
+        color: '#007BFF',
+        fontSize: 14,
+    },
+    viewMoreButton: {
+        backgroundColor: '#007BFF',
+        padding: 10,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    viewMoreText: {
+        color: '#FFF',
+        fontSize: 16,
+    },
+});
 
 export default BookRow;
