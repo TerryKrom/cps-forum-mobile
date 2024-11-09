@@ -46,7 +46,7 @@ export default function MobileSidebar({ className, ...props }) {
                 <View style={styles.overlay}>
                     <Animated.View style={[styles.modalView, { transform: [{ translateX }] }]}>
                         <Logo style={styles.logo} />
-                        <LeftSidebar />
+                        <LeftSidebar closeModal={closeModal} />
                         <Pressable style={styles.buttonClose} onPress={closeModal}>
                          <AntDesign name="closesquareo" size={24} color="black" />
                         </Pressable>

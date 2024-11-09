@@ -3,22 +3,25 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const SideBarLink = React.forwardRef(({ links, isCollapsed, ...props }, ref) => {
+const SideBarLink = React.forwardRef(({ links, isCollapsed, closeModal, ...props }, ref) => {
   const navigation = useNavigation();
 
   return (
-    <View>
-      {links.map((link, index) => (
-        <TouchableOpacity
-          key={index}
-          style={[styles.link, { backgroundColor: isCollapsed ? 'transparent' : '#3b82f6' }]}
-          onPress={() => navigation.navigate(link.slug)}
-        >
-          <FontAwesome name={link.iconName} size={18} color="white" />
-          {!isCollapsed && <Text style={styles.linkText}>{link.title}</Text>}
-        </TouchableOpacity>
-      ))}
-    </View>
+      <View>
+          {links.map((link, index) => (
+              <TouchableOpacity
+                  key={index}
+                  style={[styles.link, { backgroundColor: isCollapsed ? 'transparent' : '#3b82f6' }]}
+                  onPress={() => {
+                      navigation.navigate(link.slug);
+                      closeModal(); // Fecha o sidebar após a navegação
+                  }}
+              >
+                  <FontAwesome name={link.iconName} size={18} color="white" />
+                  {!isCollapsed && <Text style={styles.linkText}>{link.title}</Text>}
+              </TouchableOpacity>
+          ))}
+      </View>
   );
 });
 
