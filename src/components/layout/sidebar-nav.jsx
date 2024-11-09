@@ -1,20 +1,20 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-import { AntDesign } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 const SideBarLink = React.forwardRef(({ links, isCollapsed, ...props }, ref) => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.container}>
+    <View>
       {links.map((link, index) => (
         <TouchableOpacity
           key={index}
-          style={[styles.link, { backgroundColor: isCollapsed ? 'transparent' : '#f0f0f0' }]}
+          style={[styles.link, { backgroundColor: isCollapsed ? 'transparent' : '#3b82f6' }]}
           onPress={() => navigation.navigate(link.slug)}
         >
-          <AntDesign name={link.iconName} size={20} color="black" />
+          <FontAwesome name={link.iconName} size={18} color="white" />
           {!isCollapsed && <Text style={styles.linkText}>{link.title}</Text>}
         </TouchableOpacity>
       ))}
@@ -27,7 +27,7 @@ const SideBarSectionLink = React.forwardRef(({ links, isCollapsed, route, ...pro
   const { slug } = navigation.getState || {}; // Acessando slug de params
 
   return (
-    <View style={styles.container}>
+    <View>
       {links.map((link, index) => (
         <View key={index} style={styles.sectionContainer}>
           {!isCollapsed && <Text style={styles.sectionTitle}>{link.title}</Text>}
@@ -52,10 +52,6 @@ const SideBarSectionLink = React.forwardRef(({ links, isCollapsed, route, ...pro
 });
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
   link: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -65,6 +61,8 @@ const styles = StyleSheet.create({
   },
   linkText: {
     marginLeft: 10,
+    color: '#eeeeee',
+    fontWeight: 500
   },
   sectionContainer: {
     marginVertical: 10,

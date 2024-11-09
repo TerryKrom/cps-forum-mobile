@@ -1,6 +1,7 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function NewTopicButton() {
     const navigation = useNavigation();
@@ -8,9 +9,27 @@ export default function NewTopicButton() {
     return (
         <TouchableOpacity
             onPress={() => navigation.navigate('criar')} // Nome ajustado para coincidir com o Stack
-            style={{ backgroundColor: 'blue', padding: 10 }}
+            style={styles.newTopic}
         >
-            <Text style={{ color: 'white' }}>Novo Tópico</Text>
+            <Text style={{color: '#fff', fontWeight: '500'}}>
+            <AntDesign name="form" size={14} color="white" style={{marginRight: 8}}/>
+                Novo Tópico
+            </Text>
         </TouchableOpacity>
     );
 }
+
+const styles = StyleSheet.create({
+    newTopic: {
+        backgroundColor: '#4594ff',
+        color: "#ffffff",
+        borderRadius: '20px',
+        height: '40px',
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 4,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems:'center'
+    }
+})

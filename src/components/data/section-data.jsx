@@ -1,7 +1,3 @@
-import Icon from 'react-native-vector-icons/Ionicons'; // Para HomeIcon e MessageCircle
-import FontAwesome from 'react-native-vector-icons/FontAwesome'; // Para Users
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'; // Para Newspaper
-
 const Sections = [
     {
         id: 1,
@@ -167,28 +163,17 @@ const Sections = [
     }
 ]
 
-
 export const links = [
     {
         title: "Home",
-        icon: <Icon name="home" size={24} color="#000" />, // Substituindo HomeIcon
+        iconName: 'home',
         slug: "",
     },
     {
-        title: "Jornal",
-        icon: <MaterialCommunityIcons name="newspaper" size={24} color="#000" />, // Substituindo Newspaper
-        slug: "jornal"
-    },
-    {
-        title: "Grupos",
-        icon: <FontAwesome name="users" size={24} color="#000" />, // Substituindo Users
-        slug: "grupos"
-    },
-    {
-        title: "Mensagens",
-        icon: <Icon name="chatbubble" size={24} color="#000" />, // Substituindo MessageCircle
-        slug: "mensagens"
-    },
+        title: "Materiais",
+        iconName: 'book',
+        slug: 'materiais'
+    }
 ];
 
 

@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
     title: {
         fontWeight: 'bold',
         fontSize: 14,
+        marginBottom: 3,
     },
     indicator: {
         height: 8,
@@ -82,6 +83,7 @@ const styles = StyleSheet.create({
     author: {
         fontSize: 14,
         color: '#007bff',
+        marginBottom: 3,
     },
     body: {
         fontSize: 12,

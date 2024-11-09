@@ -21,14 +21,14 @@ const Home = () => {
       {/* Tabs Component */}
       <View style={styles.tabsContainer}>
         <View style={styles.tabsList}>
-          <TouchableOpacity 
-            onPress={() => setActiveTab('relevant')} 
+          <TouchableOpacity
+            onPress={() => setActiveTab('relevant')}
             style={[styles.tabTrigger, activeTab === 'relevant' && styles.activeTab]}
           >
             <Text style={[globalStyles.text, activeTab === 'relevant' ? styles.activeTabText : styles.tabText]}>Relevantes</Text>
           </TouchableOpacity>
-          <TouchableOpacity 
-            onPress={() => setActiveTab('recent')} 
+          <TouchableOpacity
+            onPress={() => setActiveTab('recent')}
             style={[styles.tabTrigger, activeTab === 'recent' && styles.activeTab]}
           >
             <Text style={[globalStyles.text, activeTab === 'recent' ? styles.activeTabText : styles.tabText]}>Recentes</Text>
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 16,
+    marginLeft: 3,
   },
   tabsList: {
     flexDirection: 'row',
@@ -66,10 +67,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 4,
     backgroundColor: '#e0e0e0',
-    marginRight: 8,
+    color: "#ffffff",
+    borderRadius: '20px',
+    height: '40px',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 4,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   activeTab: {
-    backgroundColor: '#6200ee',
+    backgroundColor: '#4594ff',
   },
   tabText: {
     color: '#000',

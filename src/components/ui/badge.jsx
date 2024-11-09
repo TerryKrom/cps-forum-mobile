@@ -9,8 +9,8 @@ const badgeVariants = {
     },
     secondary: {
         borderColor: 'transparent',
-        backgroundColor: '#f59e0b', // bg-secondary
-        color: '#000000', // text-secondary-foreground
+        backgroundColor: '#5b97f6', // bg-secondary
+        color: '#ffffff', // text-secondary-foreground
     },
     destructive: {
         borderColor: 'transparent',
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 3,
         textAlign: 'center',
+        marginRight: 3,
     },
     text: {
         fontSize: 12,
