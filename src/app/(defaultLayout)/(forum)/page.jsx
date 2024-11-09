@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Feed } from '../../../components/feed/feed';
 import { Topic } from '../../../components/data/topic-data';
-import PageTitle from '../../../components/layout/pagetitle';
 import dayjs from 'dayjs';
 import NewTopicButton from '../../../components/general/newtopic';
 import globalStyles from '../../../globalStyles'; // Importe o estilo global

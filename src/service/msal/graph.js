@@ -1,43 +1,43 @@
-import { graphConfig } from "@/service/msal/authConfig";
-import { getToken } from "@/service/msal/msal";
+import { graphConfig } from "./authConfig";
+import { getToken } from "./msal";
 
 export async function callMsGraph(accessToken) {
-    const headers = new Headers();
-    const bearer = `Bearer ${accessToken}`;
+  const headers = new Headers();
+  const bearer = `Bearer ${accessToken}`;
 
-    headers.append("Authorization", bearer);
+  headers.append("Authorization", bearer);
 
-    const options = {
-        method: "GET",
-        headers: headers
-    };
+  const options = {
+    method: "GET",
+    headers: headers,
+  };
 
-    return fetch(graphConfig.graphMeEndpoint, options)
-        .then(response => response.json())
-        .catch(error => console.log(error));
+  return fetch(graphConfig.graphMeEndpoint, options)
+    .then(response => response.json())
+    .catch(error => console.log(error));
 }
 
 export async function callMsGraphPhoto(accessToken) {
-    const headers = new Headers();
-    const bearer = `Bearer ${accessToken}`;
-    headers.append("Authorization", bearer);
+  const headers = new Headers();
+  const bearer = `Bearer ${accessToken}`;
+  headers.append("Authorization", bearer);
 
-    const options = {
-        method: "GET",
-        headers: headers
-    };
+  const options = {
+    method: "GET",
+    headers: headers,
+  };
 
-    return fetch(graphConfig.graphProfilePicEndpoint, options)
-        .catch(error => console.log(error));
+  return fetch(graphConfig.graphProfilePicEndpoint, options)
+    .catch(error => console.log(error));
 }
 
 export async function RequestProfileData() {
-    // Silently acquires an access token which is then attached to a request for MS Graph data
-    const token = await getToken();
-    const graphData = await callMsGraph(token);
-    const photoResponse = await callMsGraphPhoto(token);
-    const blob = await photoResponse.blob();
-    const url = URL.createObjectURL(blob);
+  // Silently acquires an access token which is then attached to a request for MS Graph data
+  const token = await getToken();
+  const graphData = await callMsGraph(token);
+  const photoResponse = await callMsGraphPhoto(token);
+  const blob = await photoResponse.blob();
+  const url = URL.createObjectURL(blob);  // Verifique se URL.createObjectURL funciona no React Native, pode ser necessário alterar para Image.setCache()
 
-    return { graphData, url };
+  return { graphData, url };
 }
