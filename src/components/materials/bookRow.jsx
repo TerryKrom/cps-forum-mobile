@@ -36,7 +36,9 @@ const BookRow = ({ slug }) => {
         return (
             <View key={index} style={styles.bookContainer}>
                 <TouchableOpacity onPress={() => Linking.openURL(book.src)}>
-                    <Image source={{ uri: book.cover }} style={styles.bookImage} />
+                    <View style={styles.imageContainer}>
+                        <Image source={{ uri: book.cover }} style={styles.bookImage} />
+                    </View>
                 </TouchableOpacity>
                 <View style={styles.cardBody}>
                     <Text style={styles.bookTitle}>{book.title}</Text>
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     bookContainer: {
-        width: '48%',
+        width: '100%',
         marginVertical: 8,
         borderWidth: 1,
         borderColor: '#E0E0E0',
@@ -94,10 +96,15 @@ const styles = StyleSheet.create({
     },
     bookImage: {
         width: '100%',
-        height: 150,
+        height: 300,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
     },
+    imageContainer: {
+        width: '100%',
+        height: 300,
+        overflow: 'hidden'
+    },  
     cardBody: {
         padding: 12,
     },

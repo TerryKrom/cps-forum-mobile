@@ -2,7 +2,7 @@ export const Topic = [
     {
         id: 1,
         userid: 1,
-        title: "Sejam bem-vindos ao Fórum Centro Paula Souza!",
+        title: "Sejam bem-vindos ao Fórum CPS!",
         slug: "sejam-bem-vindos-ao-forum-centro-paula-souza",
         text: "Tenho vontade de que o espaço possa receber e atender estudantes que desejem melhorar seu desempenho e sanar dúvidas, assim como ajudar a outros. Espero que a experiência frutifique e que em futuro próximo possa ser um local agradável para seus usuários! \n\n$$\nx=y+2^2\n$$\n\n‎",
         date: "2023-10-22T09:00:00",

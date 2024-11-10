@@ -33,7 +33,6 @@ export default function MobileSidebar({ className, ...props }) {
             {/* Botão de abrir o modal */}
             <Button onPress={openModal} variant="outline" size="icon" style={[styles.button, className]} {...props}>
                 <Feather name="menu" size={20} color="black" />
-                <Text style={styles.buttonText}>Abrir menu lateral</Text>
             </Button>
 
             {/* Modal com animação de slide */}
@@ -48,7 +47,7 @@ export default function MobileSidebar({ className, ...props }) {
                         <Logo style={styles.logo} />
                         <LeftSidebar closeModal={closeModal} />
                         <Pressable style={styles.buttonClose} onPress={closeModal}>
-                         <AntDesign name="closesquareo" size={24} color="black" />
+                         <AntDesign name="close" size={24} color="black" />
                         </Pressable>
                     </Animated.View>
                 </View>
@@ -66,9 +65,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         border: 'none',
     },
-    buttonText: {
-        display: 'none',
-    },
     overlay: {
         flex: 1,
         backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fundo transparente escuro
@@ -77,7 +73,7 @@ const styles = StyleSheet.create({
     modalView: {
         backgroundColor: 'white',
         paddingHorizontal: 30,
-        paddingVertical: 5,
+        paddingVertical: 0,
         width: '75%', // Tela cheia
         height: '100%',
         shadowColor: '#000',
@@ -96,7 +92,7 @@ const styles = StyleSheet.create({
     buttonClose: {
         backgroundColor: 'transparent',
         position: 'absolute',
-        top: 35,
+        top: 30,
         right: 20,
         width: 20,
         height: 20,

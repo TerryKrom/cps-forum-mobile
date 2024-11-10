@@ -16,15 +16,14 @@ export default function AuthenticationPage() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.leftContainer}>
-                {/* Background ou imagem personalizada */}
-                <Image
-                    source={require('../../../assets/bg404.png')}
-                    style={StyleSheet.absoluteFill}
-                    resizeMode="cover"
-                />
-            </View>
-            <View style={styles.rightContainer}>
+            {/* Imagem de plano de fundo */}
+            <Image
+                source={require('../../../assets/bg404.png')}
+                style={styles.backgroundImage}
+                resizeMode="cover"
+            />
+            {/* Conteúdo principal */}
+            <View style={styles.contentContainer}>
                 <View style={styles.signInContainer}>
                     <View style={styles.header}>
                         <Text style={styles.title}>Entre em sua conta</Text>
@@ -55,18 +54,18 @@ export default function AuthenticationPage() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
     },
-    leftContainer: {
-        flex: 3,
-        display: 'none', // Oculta em telas pequenas
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundImage: {
+        ...StyleSheet.absoluteFillObject,
+        width: '100%',
+        height: '100%',
     },
-    rightContainer: {
-        flex: 2,
+    contentContainer: {
+        flex: 1,
         padding: 20,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fundo semitransparente para destaque do conteúdo
     },
     signInContainer: {
         alignItems: 'center',

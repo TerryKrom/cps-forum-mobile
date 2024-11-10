@@ -65,20 +65,24 @@ const styles = StyleSheet.create({
   linkText: {
     marginLeft: 10,
     color: '#eeeeee',
-    fontWeight: 500
+    fontFamily: 'Geist',
+    fontWeight: 900
   },
   sectionContainer: {
     marginVertical: 10,
   },
   sectionTitle: {
-    fontWeight: 'bold',
+    fontWeight: 800,
     marginBottom: 5,
+    fontFamily: 'Geist',
   },
   sectionLink: {
     padding: 5,
   },
   sectionLinkText: {
     color: 'grey',
+    fontFamily: 'Geist',
+    fontWeight: 600
   },
   activeLink: {
     color: 'blue',
