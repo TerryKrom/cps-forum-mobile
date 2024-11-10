@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
   linkText: {
     marginLeft: 10,
     color: '#eeeeee',
-    fontFamily: 'Geist',
-    fontWeight: 900
+    fontFamily: 'Geist-300',
+    fontWeight: 800,
   },
   sectionContainer: {
     marginVertical: 10,
@@ -74,14 +74,14 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontWeight: 800,
     marginBottom: 5,
-    fontFamily: 'Geist',
+    fontFamily: 'Geist-200',
   },
   sectionLink: {
     padding: 5,
   },
   sectionLinkText: {
     color: 'grey',
-    fontFamily: 'Geist',
+    fontFamily: 'Geist-200',
     fontWeight: 600
   },
   activeLink: {

@@ -50,7 +50,7 @@ const Criar = () => {
       privacy: privacy,
       section: section,
       body: body,
-      tag: "Feira de Ciências 2024"
+      tag: "Tag Example"
     };
 
     try {
@@ -178,6 +178,7 @@ const Criar = () => {
             onSubmitEditing={() => handleTags(inputTag)}
           />
           <Button title="Adicionar tag" onPress={() => handleTags(inputTag)} />
+            <View style={{marginBottom: 20}}></View>
           {step === 4 && <Button title="Próximo" onPress={() => setStep(step + 1)} />}
         </View>
       )}
@@ -215,36 +216,48 @@ const Criar = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
+    backgroundColor: '#ffffff',
+    height: '115vh'
   },
   header: {
     fontSize: 24,
-    fontWeight: 'bold',
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: 'left',
+    fontFamily: 'Geist-200',
+    fontWeight: 900
   },
   formGroup: {
     marginBottom: 20,
+    backgroundColor: '#fff'
   },
   label: {
     fontSize: 16,
-    marginBottom: 8,
+    marginBottom: 5,
   },
   input: {
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
     borderRadius: 5,
-    marginBottom: 8,
+    marginBottom: 5,
+    fontFamily: 'Geist-200',
   },
   picker: {
     height: 50,
     width: '100%',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 5,
+    fontFamily: 'Geist-200',
   },
   textArea: {
     height: 100,
+    fontFamily: 'Geist-Mono',
   },
   error: {
-    color: 'red',
+    color: '#ff0000',
     fontSize: 12,
   },
   tagsContainer: {
@@ -259,7 +272,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   tagText: {
-    color: 'white',
+    color: '#ffffff',
   },
 });
 
