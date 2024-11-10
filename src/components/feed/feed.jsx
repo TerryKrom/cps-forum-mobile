@@ -1,11 +1,12 @@
-import { Topic } from "@/components/feed/topic"
+import { Topic } from "../../components/feed/topic"
+import { View } from "react-native"
 
 export const Feed = ({ items }) => {
     return (
-        <div className="flex flex-col gap-2 my-4">
+        <View>
             {items.map((item, i) => (
                <Topic key={i} item={item} /> 
             ))}
-        </div>
+        </View>
     )
 }

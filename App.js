@@ -9,6 +9,7 @@ import Home from './src/app/(defaultLayout)/(forum)/page';
 import Criar from './src/app/(defaultLayout)/criar/page';
 import AuthenticationPage from './src/app/sign-in/page';
 import Materiais from './src/app/(defaultLayout)/materiais/page';
+import TopicView from './src/app/(defaultLayout)/topico/page';
 
 const Stack = createStackNavigator();
 
@@ -54,6 +55,11 @@ export default function App() {
             name="materiais" // O nome da tela deve corresponder ao valor passado no NewTopicButton
             component={Materiais}
             options={{ title: 'Materiais' }}
+          />
+          <Stack.Screen
+            name="topicView"
+            component={TopicView}
+            options={{ title: 'Detalhes do Tópico' }}
           />
         </Stack.Navigator>
         <StatusBar style="auto" />

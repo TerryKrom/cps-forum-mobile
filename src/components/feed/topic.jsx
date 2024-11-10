@@ -4,16 +4,20 @@ import { dayjs } from "../../components/data/dayjs"; // Certifique-se de que ess
 import { User } from "../../components/data/topic-data";
 import { Badge } from "../../components/ui/badge"; // Adapte a implementação do Badge para React Native
 import globalStyles from '../../globalStyles'; // Importe o estilo global
+import { useNavigation } from "@react-navigation/native";
 
 export const Topic = ({ item }) => {
     const regex = /[^\p{L}\p{N}\s.,!?()-[\]]/giu;
     const filteredBody = item.text.replace(regex, '');
     const author = User.find(user => user.id == item.userid);
-
+    const navigation = useNavigation()
     return (
         <TouchableOpacity
             style={styles.container}
-            onPress={() => Linking.openURL(`/topico/${item.id}/${item.slug}`)} // Navegando para o tópico
+            onPress={() => {
+                console.log('Navegando para topicView com id:', item.id);
+                navigation.navigate('topicView', { id: item.id });
+              }} // Passando o parâmetro id
         >
             <View style={styles.header}>
                 <View style={styles.titleContainer}>

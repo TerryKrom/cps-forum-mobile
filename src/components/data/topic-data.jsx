@@ -4,7 +4,7 @@ export const Topic = [
         userid: 1,
         title: "Sejam bem-vindos ao Fórum CPS!",
         slug: "sejam-bem-vindos-ao-forum-centro-paula-souza",
-        text: "Tenho vontade de que o espaço possa receber e atender estudantes que desejem melhorar seu desempenho e sanar dúvidas, assim como ajudar a outros. Espero que a experiência frutifique e que em futuro próximo possa ser um local agradável para seus usuários! \n\n$$\nx=y+2^2\n$$\n\n‎",
+        text: "Tenho vontade de que o espaço possa receber e atender estudantes que desejem melhorar seu desempenho e sanar dúvidas, assim como ajudar a outros. Espero que a experiência frutifique e que em futuro próximo possa ser um local agradável para seus usuários!",
         date: "2023-10-22T09:00:00",
         read: true,
         labels: ["comunicado"],
