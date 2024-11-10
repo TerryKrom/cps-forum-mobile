@@ -1,43 +1,16 @@
-import { API_SCOPE, loginRequest } from "@/service/msal/authConfig";
+import { graphConfig } from "./authConfig";
 
-export async function getCurrentToken(msalInstance){
-    const acquireAccessToken = async () => {
-        const activeAccount = msalInstance.getActiveAccount(); // This will only return a non-null value if you have logic somewhere else that calls the setActiveAccount API
-        const accounts = msalInstance.getAllAccounts();
-
-        if (!activeAccount && accounts.length === 0) {
-            /*
-            * User is not signed in. Throw error or wait for user to login.
-            * Do not attempt to log a user in outside of the context of MsalProvider
-            */
-            return null;
-        }
-        const request = {
-            ...loginRequest,
-            account: activeAccount || accounts[0]
-        };
-
-        try {
-            const authResult = await msalInstance.acquireTokenSilent(request);
-            return authResult.accessToken;
-        } catch (error) {
-            console.error(error)
-            // // If silent acquisition fails, try acquiring token through popup or redirect
-            // try {
-            //     const authResult = await msalInstance.acquireTokenPopup(request);
-            //     return authResult.accessToken;
-            // } catch (error) {
-            //     console.error("Error acquiring token:", error);
-            //     return null;
-            // }
-        }
-    };
-
-    var token = null;
-
-    if (typeof window !== 'undefined') {
-        token = await acquireAccessToken();
-    }
-
-    return token;
+export async function getUserData(msalInstance) {
+  const token = await getCurrentToken(msalInstance);
+  if (token) {
+    const response = await fetch(graphConfig.graphMeEndpoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const userData = await response.json();
+    return userData; // Retorna os dados do usuário (nome, e-mail)
+  } else {
+    console.error("No token found");
+  }
 }
