@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import SignInButton from '@/components/signin/signinbutton';
+import SignInButton from '../../components/signin/signinbutton';
 import { useIsAuthenticated } from '@azure/msal-react';
 
 export default function AuthenticationPage() {

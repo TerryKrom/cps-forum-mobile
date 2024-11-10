@@ -1,16 +1,14 @@
-import { LogLevel } from 'react-native-msal';  // Alterado para msal-react-native
-
-export const API_SCOPE = "api://" + process.env.NEXT_PUBLIC_ENTRA_ID_CLIENT_ID;
+import { LogLevel } from 'react-native-msal';
 
 export const msalConfig = {
   auth: {
-    clientId: process.env.NEXT_PUBLIC_ENTRA_ID_CLIENT_ID,
-    authority: `https://login.microsoftonline.com/${process.env.NEXT_PUBLIC_ENTRA_ID_TENANT_ID}`,
-    redirectUri: process.env.NEXT_PUBLIC_ENTRA_ID_REDIRECT_URI,  // Verifique o redirectUri para o React Native
-    postLogoutRedirectUri: process.env.NEXT_PUBLIC_ENTRA_ID_REDIRECT_URI,
+    clientId: 'e271fae5-bf1c-4b06-8b1f-eb37ccf8b223', // Seu Client ID
+    authority: 'https://login.microsoftonline.com/d848c1d6-0ea1-49bb-b29e-4482027ca5e1', // Seu Tenant ID
+    redirectUri: 'https://www.cpsforum.com.br/api/auth/callback/microsoft-entra-id', // A URL de redirecionamento pública
+    postLogoutRedirectUri: 'https://www.cpsforum.com.br/api/auth/callback/microsoft-entra-id', // A mesma URL para o logout
   },
   cache: {
-    cacheLocation: "localStorage", // Use localStorage ou AsyncStorage no React Native
+    cacheLocation: 'asyncStorage', // Use localStorage ou AsyncStorage no React Native
     storeAuthStateInCookie: false, // Não precisa configurar cookies no React Native
   },
   system: {
@@ -39,10 +37,10 @@ export const msalConfig = {
 };
 
 export const loginRequest = {
-  scopes: ["openid", "profile", "User.Read", "User.Read.All"],
+  scopes: ["openid", "profile", "User.Read", "User.Read.All"], // Escopos da API que você deseja acessar
 };
 
 export const graphConfig = {
-  graphMeEndpoint: `https://graph.microsoft.com/v1.0/me`,
-  graphProfilePicEndpoint: "https://graph.microsoft.com/beta/me/photo/$value"
+  graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me', // Endpoint para acessar o perfil
+  graphProfilePicEndpoint: 'https://graph.microsoft.com/beta/me/photo/$value' // Endpoint para acessar a foto de perfil
 };

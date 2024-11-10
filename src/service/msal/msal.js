@@ -1,55 +1,72 @@
-// import { PublicClientApplication, EventType, AuthenticationResult } from 'react-native-msal';
-// import { getCurrentToken } from './tokenFetcher'
 // import { msalConfig, loginRequest } from './authConfig';
+// import { getCurrentToken } from './tokenFetcher';
 // import { setInitialized } from './MyMsalProvider';
 
-// export const msalInstance = new PublicClientApplication(msalConfig);
+// const msal = require('react-native-msal').default;
+// // Criação da instância do PublicClientApplication
+// const pca = new msal.PublicClientApplication(msalConfig);
 
-// export async function initializeMsal() {
-//   await msalInstance.initialize();  // Certifique-se de que a inicialização é compatível com o RN
-//   setInitialized(true);
-//   const accounts = await msalInstance.getAllAccounts();
-//   if (accounts.length > 0) {
-//     msalInstance.setActiveAccount(accounts[0]);
-//   }
+// async function initializeMsal() {
+//   try {
+//     // Inicializa a instância do MSAL
+//     await pca.init();
+//     console.log('MSAL Initialized Successfully');
 
-//   msalInstance.addEventCallback(async (event) => {
-//     if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
-//       const payload = event.payload;
-//       const account = payload.account;
-//       msalInstance.setActiveAccount(account);
+//     // Recupera todas as contas ativas
+//     const accounts = await pca.getAccounts();
+//     if (accounts.length > 0) {
+//       pca.setActiveAccount(accounts[0]);
 //     }
-//   });
+
+//     // Adiciona um callback para lidar com eventos de login
+//     pca.addEventCallback(async (event) => {
+//       if (event.eventType === EventType.LOGIN_SUCCESS && event.payload) {
+//         const payload = event.payload;
+//         const account = payload.account;
+//         pca.setActiveAccount(account);
+//       }
+//     });
+
+//     setInitialized(true);
+//   } catch (error) {
+//     console.error('Error initializing MSAL:', error);
+//   }
 // }
 
 // export async function getToken() {
-//   const authToken = await getCurrentToken(msalInstance);
-//   return authToken;
+//   try {
+//     const authToken = await getCurrentToken(pca);
+//     return authToken;
+//   } catch (error) {
+//     console.error('Error getting token:', error);
+//   }
 // }
 
+// // Função para fazer login (popup ou redirect)
 // export const handleLogin = (loginType = "redirect") => {
 //   if (loginType === "popup") {
-//     msalInstance.loginPopup(loginRequest).catch((e) => {
+//     pca.loginPopup(loginRequest).catch((e) => {
 //       console.error(`loginPopup failed: ${e}`);
 //     });
 //   } else if (loginType === "redirect") {
-//     msalInstance.loginRedirect(loginRequest).catch((e) => {
+//     pca.loginRedirect(loginRequest).catch((e) => {
 //       console.error(`loginRedirect failed: ${e}`);
 //     });
 //   }
 // };
 
+// // Função para fazer logout (popup ou redirect)
 // export const handleLogout = (logoutType = "redirect") => {
 //   if (logoutType === "popup") {
-//     msalInstance.logoutPopup().catch((e) => {
+//     pca.logoutPopup().catch((e) => {
 //       console.error(`logoutPopup failed: ${e}`);
 //     });
 //   } else if (logoutType === "redirect") {
 //     const logoutRequest = {
-//       account: msalInstance.getActiveAccount(),
+//       account: pca.getActiveAccount(),
 //       postLogoutRedirectUri: "/",
 //     };
-//     msalInstance.logoutRedirect(logoutRequest).catch((e) => {
+//     pca.logoutRedirect(logoutRequest).catch((e) => {
 //       console.error(`logoutRedirect failed: ${e}`);
 //     });
 //   }

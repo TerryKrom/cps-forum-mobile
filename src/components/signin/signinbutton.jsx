@@ -1,19 +1,24 @@
 'use client'
 
 import React from "react"
-import { handleLogin } from "@/service/msal/msal"
-import { Button } from "@/components/ui/button"
-import Spinner from "@/components/ui/spinner"
+import { handleLogin } from "../../service/msal/msal"
+import { Button } from "../../components/ui/button"
+import Spinner from "../../components/ui/spinner"
 
 export default function SignInButton() {
     const [isLoading, setIsLoading] = React.useState(false)
+
     const handleSubmit = () => {
         setIsLoading(true)
-        handleLogin('redirect')
+        handleLogin('redirect')  // Esse método já vai cuidar da navegação
     }
 
     return (
-        <Button disabled={isLoading} onClick={handleSubmit} className={"bg-sky-700 text-foreground relative hover:bg-sky-800 text-white"}>
+        <Button
+            disabled={isLoading}
+            onClick={handleSubmit}
+            className={"bg-sky-700 text-foreground relative hover:bg-sky-800 text-white"}
+        >
             {isLoading ? (
                 <Spinner />
             ) : (
