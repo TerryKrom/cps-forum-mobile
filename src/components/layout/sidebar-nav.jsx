@@ -11,13 +11,13 @@ const SideBarLink = React.forwardRef(({ links, isCollapsed, closeModal, ...props
           {links.map((link, index) => (
               <TouchableOpacity
                   key={index}
-                  style={[styles.link, { backgroundColor: isCollapsed ? 'transparent' : '#3b82f6' }]}
+                  style={[styles.link, { backgroundColor: isCollapsed ? 'transparent' : '#4594ff' }]}
                   onPress={() => {
                       navigation.navigate(link.slug);
                       closeModal(); // Fecha o sidebar após a navegação
                   }}
               >
-                  <FontAwesome name={link.iconName} size={18} color="white" />
+                  <FontAwesome name={link.iconName} size={18} color="#fff" />
                   {!isCollapsed && <Text style={styles.linkText}>{link.title}</Text>}
               </TouchableOpacity>
           ))}
