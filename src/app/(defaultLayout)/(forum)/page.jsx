@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Feed } from '../../../components/feed/feed';
 import { Topic } from '../../../components/data/topic-data';
@@ -8,10 +8,20 @@ import globalStyles from '../../../globalStyles'; // Importe o estilo global
 
 const Home = () => {
   const forumMessagesTopics = Topic.filter(topic => topic.section === 1);
-  const relevantTopics = Topic.filter(topic => topic.section !== 1);
-  const recentTopics = Topic.filter(topic => topic.section !== 1).sort((a, b) => dayjs(a.date).isBefore(dayjs(b.date) ? 1 : -1));
+  
+  // Lógica para os tópicos relevantes e recentes
+  const relevantTopics = useMemo(() => Topic.filter(topic => topic.section !== 1), []);
+  const recentTopics = useMemo(() => 
+    Topic.filter(topic => topic.section !== 1)
+      .sort((a, b) => dayjs(a.date).isBefore(dayjs(b.date)) ? 1 : -1), [] // Ordenação corrigida
+  );
 
-  const [activeTab, setActiveTab] = React.useState('relevant');
+  const [activeTab, setActiveTab] = useState('relevant');
+
+  const displayedTopics = useMemo(() => {
+    // Alternar entre os tópicos relevantes ou recentes com base no estado da aba ativa
+    return activeTab === 'relevant' ? relevantTopics : recentTopics;
+  }, [activeTab, relevantTopics, recentTopics]);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -37,11 +47,7 @@ const Home = () => {
       </View>
 
       {/* Tabs Content */}
-      {activeTab === 'relevant' ? (
-        <Feed items={relevantTopics} />
-      ) : (
-        <Feed items={recentTopics} />
-      )}
+      <Feed items={displayedTopics} />
     </ScrollView>
   );
 }
@@ -67,11 +73,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#eee',
     color: "#ffffff",
-    borderRadius: '20px',
     height: '40px',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 4,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

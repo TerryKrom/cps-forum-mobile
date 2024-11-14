@@ -11,8 +11,8 @@ export default function NewTopicButton() {
             onPress={() => navigation.navigate('criar')} // Nome ajustado para coincidir com o Stack
             style={styles.newTopic}
         >
-            <Text style={{color: '#fff', fontWeight: '500'}}>
-            <AntDesign name="form" size={14} color="white" style={{marginRight: 8}}/>
+            <Text style={{color: '#fff', fontWeight: '600', fontFamily: 'Geist-200'}}>
+            <AntDesign name="form" size={14} color="#fff" style={{marginRight: 8}}/>
                 Novo Tópico
             </Text>
         </TouchableOpacity>
@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         display: 'flex',
         justifyContent: 'center',
-        alignItems:'center'
+        alignItems:'center',
+        fontFamily: 'Geist-200'
     }
 })
