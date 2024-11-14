@@ -39,7 +39,7 @@ export default function App() {
           <Stack.Screen
             name="Home"
             component={Home}
-            options={{ title: 'Home' }}
+            options={{ title: 'Fórum Centro Paula Souza' }}
           />
           <Stack.Screen
             name="criar" // O nome da tela deve corresponder ao valor passado no NewTopicButton
