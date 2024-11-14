@@ -2,17 +2,12 @@ import React, { useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import SignInButton from '../../components/signin/signinbutton';
-import { useIsAuthenticated } from '@azure/msal-react';
+import { useSession } from '../../service/msauth/SessionProvider';
+import { Button } from 'react-native';
 
 export default function AuthenticationPage() {
     const navigation = useNavigation();
-    const isAuthenticated = useIsAuthenticated();
-
-    useEffect(() => {
-        if (isAuthenticated) {
-            navigation.navigate('Home'); // Navega para a Home se autenticado
-        }
-    }, [isAuthenticated]);
+    const { signIn, session } = useSession();
 
     return (
         <View style={styles.container}>
@@ -32,7 +27,7 @@ export default function AuthenticationPage() {
                         </Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <SignInButton />
+                        <Button title="Entrar" onPress={() => signIn()} />
                     </View>
                     <Text style={styles.termsText}>
                         Ao clicar em entrar, você concorda com os&nbsp;
@@ -98,3 +93,30 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     },
 });
+
+// import { useState } from 'react';
+// import * as WebBrowser from 'expo-web-browser';
+// import {
+//   exchangeCodeAsync,
+//   makeRedirectUri,
+//   useAuthRequest,
+//   useAutoDiscovery,
+// } from 'expo-auth-session';
+// import { Button, Text, SafeAreaView } from 'react-native';
+// import { setToken } from '../../service/msauth/token';
+
+
+// export default function AuthenticationPage() {
+    
+//   return (
+//     <SafeAreaView>
+//       <Button
+//         title="Login"
+//         onPress={() => {
+//           signIn();
+//         }}
+//       />
+//       <Text>{session}</Text>
+//     </SafeAreaView>
+//   );
+// }

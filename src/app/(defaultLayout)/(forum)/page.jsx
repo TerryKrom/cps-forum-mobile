@@ -5,8 +5,11 @@ import { Topic } from '../../../components/data/topic-data';
 import dayjs from 'dayjs';
 import NewTopicButton from '../../../components/general/newtopic';
 import globalStyles from '../../../globalStyles'; // Importe o estilo global
+import { useSession } from '../../../service/msauth/SessionProvider';
 
 const Home = () => {
+  const {user} = useSession();
+
   const forumMessagesTopics = Topic.filter(topic => topic.section === 1);
   
   // Lógica para os tópicos relevantes e recentes
@@ -25,7 +28,11 @@ const Home = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+
       <Feed items={forumMessagesTopics} />
+
+      {user && <Text>Olá, {user.displayName}</Text>}
+      
 
       {/* Tabs Component */}
       <View style={styles.tabsContainer}>

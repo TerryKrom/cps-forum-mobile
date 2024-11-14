@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { useNavigation } from '@react-navigation/native';
-import { handleLogout } from "../../../service/msal/msal";
+// import { handleLogout } from "../../../service/msal/msal";
 
 export default function AccountButton({ picurl, graphData }) {
     const navigation = useNavigation();
@@ -17,9 +17,9 @@ export default function AccountButton({ picurl, graphData }) {
                         {picurl ? (
                             <AvatarImage src={picurl} />
                         ) : null}
-                        <AvatarFallback>
+                        <Text>
                             {graphData.givenName.charAt(0) + graphData.surname.charAt(0)}
-                        </AvatarFallback>
+                        </Text>
                     </Avatar>
                 </PopoverTrigger>
                 <PopoverContent side={"bottom"} align={"end"}>
@@ -40,7 +40,7 @@ export default function AccountButton({ picurl, graphData }) {
                             <Feather name="settings" size={15} color="black" />
                             <Text style={{ fontSize: 14 }}>Configurações</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => handleLogout('redirect')} style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                        <TouchableOpacity onPress={() => {}} style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
                             <MaterialIcons name="logout" size={15} color="black" />
                             <Text style={{ fontSize: 14 }}>Sair</Text>
                         </TouchableOpacity>
