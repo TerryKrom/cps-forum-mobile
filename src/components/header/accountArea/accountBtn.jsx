@@ -4,7 +4,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { Feather, FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { useNavigation } from '@react-navigation/native';
-// import { handleLogout } from "../../../service/msal/msal";
 
 export default function AccountButton({ picurl, graphData }) {
     const navigation = useNavigation();

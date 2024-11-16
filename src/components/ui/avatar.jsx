@@ -1,35 +1,61 @@
-"use client"
+import React from 'react';
+import { View, Image, Text, StyleSheet } from 'react-native';
 
-import * as React from "react"
-import * as AvatarPrimitive from "@radix-ui/react-avatar"
-
-import { cn } from "@/lib/utils"
-
-const Avatar = React.forwardRef(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Root
+const Avatar = React.forwardRef(({ className, style, children, ...props }, ref) => (
+  <View
     ref={ref}
-    className={cn("cursor-pointer relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full", className)}
-    {...props} />
-))
-Avatar.displayName = AvatarPrimitive.Root.displayName
+    style={[styles.avatar, style]}
+    {...props}>
+    {children}
+  </View>
+));
+Avatar.displayName = 'Avatar';
 
-const AvatarImage = React.forwardRef(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Image
+const AvatarImage = React.forwardRef(({ className, style, source, ...props }, ref) => (
+  <Image
     ref={ref}
-    className={cn("aspect-square h-full w-full", className)}
-    {...props} />
-))
-AvatarImage.displayName = AvatarPrimitive.Image.displayName
+    style={[styles.avatarImage, style]}
+    source={source}
+    {...props}
+  />
+));
+AvatarImage.displayName = 'AvatarImage';
 
-const AvatarFallback = React.forwardRef(({ className, ...props }, ref) => (
-  <AvatarPrimitive.Fallback
+const AvatarFallback = React.forwardRef(({ className, style, children, ...props }, ref) => (
+  <View
     ref={ref}
-    className={cn(
-      "flex h-full w-full items-center justify-center rounded-full bg-muted",
-      className
-    )}
-    {...props} />
-))
-AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
+    style={[styles.avatarFallback, style]}
+    {...props}>
+    <Text style={styles.avatarFallbackText}>{children}</Text>
+  </View>
+));
+AvatarFallback.displayName = 'AvatarFallback';
 
-export { Avatar, AvatarImage, AvatarFallback }
+const styles = StyleSheet.create({
+  avatar: {
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    overflow: 'hidden',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ccc',
+  },
+  avatarImage: {
+    height: '100%',
+    width: '100%',
+  },
+  avatarFallback: {
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ddd',
+  },
+  avatarFallbackText: {
+    fontSize: 18,
+    color: '#555',
+  },
+});
+
+export { Avatar, AvatarImage, AvatarFallback };
