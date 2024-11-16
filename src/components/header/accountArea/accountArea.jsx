@@ -1,33 +1,32 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet} from 'react-native';
-import { useIsAuthenticated } from "@azure/msal-react";
 import { useNavigation } from '@react-navigation/native';
-import { initialized } from "@/service/msal/MyMsalProvider";
+// import { initialized } from "@/service/msal/MyMsalProvider";
 import AccountButton from "./accountBtn";
-import { RequestProfileData } from "@/service/msal/graph";
+// import { RequestProfileData } from "/service/msal/graph";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import { useSession } from '../../../service/msauth/SessionProvider';
 
 function AccountArea() {
-  const [graphData, setGraphData] = React.useState(null);
   const [picurl, setPicurl] = React.useState(null);
-  const isAuthenticated = useIsAuthenticated();
   const navigation = useNavigation();
+  const {session, user} = useSession();
 
-  async function setData() {
-    const { graphData, url } = await RequestProfileData();
-    setGraphData(graphData);
-    setPicurl(url);
-  }
+  // async function setData() {
+  //   const { graphData, url } = await RequestProfileData();
+  //   setGraphData(graphData);
+  //   setPicurl(url);
+  // }
 
-  React.useEffect(() => {
-    if (isAuthenticated && initialized) {
-      setData();
-    }
-  }, [isAuthenticated, initialized]);
+  // React.useEffect(() => {
+  //   if (isAuthenticated && initialized) {
+  //     // setData();
+  //   }
+  // }, [isAuthenticated, initialized]);
 
   return (
-    isAuthenticated ? (
-      <AccountButton picurl={picurl} graphData={graphData} />
+    session && user ? (
+      <Text>{user.surname}</Text>
     ) : (
       <TouchableOpacity 
         onPress={() => navigation.navigate('signin')} 

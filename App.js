@@ -10,6 +10,7 @@ import Criar from './src/app/(defaultLayout)/criar/page';
 import AuthenticationPage from './src/app/sign-in/page';
 import Materiais from './src/app/(defaultLayout)/materiais/page';
 import TopicView from './src/app/(defaultLayout)/topico/page';
+import { SessionProvider } from './src/service/msauth/SessionProvider';
 
 const Stack = createStackNavigator();
 
@@ -33,37 +34,39 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <MainLayout>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ title: 'Fórum Centro Paula Souza' }}
-          />
-          <Stack.Screen
-            name="criar" // O nome da tela deve corresponder ao valor passado no NewTopicButton
-            component={Criar}
-            options={{ title: 'Criar' }}
-          />
-          <Stack.Screen
-            name="signin" // O nome da tela deve corresponder ao valor passado no NewTopicButton
-            component={AuthenticationPage}
-            options={{ title: 'Sign In' }}
-          />
-          <Stack.Screen
-            name="materiais" // O nome da tela deve corresponder ao valor passado no NewTopicButton
-            component={Materiais}
-            options={{ title: 'Materiais' }}
-          />
-          <Stack.Screen
-            name="topicView"
-            component={TopicView}
-            options={{ title: 'Detalhes do Tópico' }}
-          />
-        </Stack.Navigator>
-        <StatusBar style="auto" />
-      </MainLayout>
-    </NavigationContainer>
+    <SessionProvider>
+      <NavigationContainer>
+        <MainLayout>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ title: 'Fórum Centro Paula Souza' }}
+            />
+            <Stack.Screen
+              name="criar" // O nome da tela deve corresponder ao valor passado no NewTopicButton
+              component={Criar}
+              options={{ title: 'Criar' }}
+            />
+            <Stack.Screen
+              name="signin" // O nome da tela deve corresponder ao valor passado no NewTopicButton
+              component={AuthenticationPage}
+              options={{ title: 'Sign In' }}
+            />
+            <Stack.Screen
+              name="materiais" // O nome da tela deve corresponder ao valor passado no NewTopicButton
+              component={Materiais}
+              options={{ title: 'Materiais' }}
+            />
+            <Stack.Screen
+              name="topicView"
+              component={TopicView}
+              options={{ title: 'Detalhes do Tópico' }}
+            />
+          </Stack.Navigator>
+          <StatusBar style="auto" />
+        </MainLayout>
+      </NavigationContainer>
+    </SessionProvider>
   );
 }
