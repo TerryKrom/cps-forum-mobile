@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import SignInButton from '../../components/signin/signinbutton';
 import { useSession } from '../../service/msauth/SessionProvider';
-import { Button } from 'react-native';
+import bgImage from '../../../assets/bg404.png';
 
 export default function AuthenticationPage() {
     const navigation = useNavigation();
@@ -13,7 +12,7 @@ export default function AuthenticationPage() {
         <View style={styles.container}>
             {/* Imagem de plano de fundo */}
             <Image
-                source={require('../../../assets/bg404.png')}
+                source={bgImage}
                 style={styles.backgroundImage}
                 resizeMode="cover"
             />
@@ -27,7 +26,9 @@ export default function AuthenticationPage() {
                         </Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <Button title="Entrar" onPress={() => signIn()} />
+                        <TouchableOpacity onPress={() => signIn()}>
+                            <Text style={{ color: '#fff', fontWeight: 'bold' }}>Entrar</Text>
+                        </TouchableOpacity>
                     </View>
                     <Text style={styles.termsText}>
                         Ao clicar em entrar, você concorda com os&nbsp;
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
         padding: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fundo semitransparente para destaque do conteúdo
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
     signInContainer: {
         alignItems: 'center',
@@ -93,30 +94,3 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline',
     },
 });
-
-// import { useState } from 'react';
-// import * as WebBrowser from 'expo-web-browser';
-// import {
-//   exchangeCodeAsync,
-//   makeRedirectUri,
-//   useAuthRequest,
-//   useAutoDiscovery,
-// } from 'expo-auth-session';
-// import { Button, Text, SafeAreaView } from 'react-native';
-// import { setToken } from '../../service/msauth/token';
-
-
-// export default function AuthenticationPage() {
-    
-//   return (
-//     <SafeAreaView>
-//       <Button
-//         title="Login"
-//         onPress={() => {
-//           signIn();
-//         }}
-//       />
-//       <Text>{session}</Text>
-//     </SafeAreaView>
-//   );
-// }
