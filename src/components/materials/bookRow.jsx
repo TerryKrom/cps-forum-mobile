@@ -37,7 +37,7 @@ const BookRow = ({ slug }) => {
             <View key={index} style={styles.bookContainer}>
                 <TouchableOpacity onPress={() => Linking.openURL(book.src)}>
                     <View style={styles.imageContainer}>
-                        <Image source={{ uri: book.cover }} style={styles.bookImage} />
+                        <Image source={{ uri: book.cover }} style={styles.bookImage} alt={book.title}/>
                     </View>
                 </TouchableOpacity>
                 <View style={styles.cardBody}>
@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     imageContainer: {
         width: '100%',
         height: 300,
-        overflow: 'hidden'
     },  
     cardBody: {
         padding: 12,

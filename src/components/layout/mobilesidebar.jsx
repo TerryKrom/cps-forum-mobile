@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Modal, StyleSheet, Text, Pressable, View, Animated, ScrollView } from 'react-native';
+import { Modal, StyleSheet, Pressable, View, Animated, ScrollView } from 'react-native';
 import { Feather } from '@expo/vector-icons'; 
 import { Button } from '../../components/ui/button'; 
 import { Logo } from '../../components/header/header'; 
