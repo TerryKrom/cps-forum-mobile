@@ -8,18 +8,16 @@ import { useTheme } from 'react-native-paper';
 export const Logo = () => {
     const navigation = useNavigation();
     const { colors } = useTheme();
-    const logoSource = colors.dark ? require('../../../assets/logo-white.svg') : require('../../../assets/logo-black.svg'); // Ajuste o caminho
+    // const logoSource = colors.dark ?  : require('../../../assets/logo-black.svg'); // Ajuste o caminho
 
     return (
         <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-            <Image source={logoSource} style={styles.logo} />
+            <Image source={require('../../../assets/logo-black.png')} style={styles.logo} />
         </TouchableOpacity>
     );
 };
 
 function Header() {
-    const navigation = useNavigation();
-
     return (
         <View style={styles.shadowHeader}>
             <View style={styles.leftHeader}>
