@@ -12,7 +12,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { sectionlinks } from '../../../components/data/section-data';
-import { Picker } from '@react-native-picker/picker'; // Instale @react-native-picker/picker
+import { Picker } from '@react-native-picker/picker';
 import { toast } from 'react-toastify';
 
 // Schema de validação com Zod
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: '#ffffff',
-    height: '115vh'
+    height: '100%'
   },
   header: {
     fontSize: 24,
