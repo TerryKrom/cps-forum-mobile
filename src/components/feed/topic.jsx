@@ -10,20 +10,32 @@ export const Topic = ({ item }) => {
     const regex = /[^\p{L}\p{N}\s.,!?()-[\]]/giu;
     const filteredBody = item.text.replace(regex, '');
     const author = User.find(user => user.id == item.userid);
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+
+    // Função para verificar e truncar o título
+    const getTruncatedTitle = (title) => {
+        if (title.length > 30) {
+            return title.substring(0, 30) + '...'; // Trunca o título se tiver mais de 25 caracteres
+        }
+        return title;
+    }
+
     return (
         <TouchableOpacity
             style={styles.container}
             onPress={() => {
                 console.log('Navegando para topicView com id:', item.id);
                 navigation.navigate('topicView', { id: item.id });
-              }} // Passando o parâmetro id
+            }}
         >
             <View style={styles.header}>
                 <View style={styles.titleContainer}>
-                    <Text style={[styles.title, globalStyles.text]}>{item.title}</Text>
-                    {!item.read && <View style={styles.indicator} />}
+                    {/* Aplica a função getTruncatedTitle ao título */}
+                    <Text style={[styles.title, globalStyles.text]}>
+                        {getTruncatedTitle(item.title)}
+                    </Text>
                 </View>
+                {!item.read && <View style={styles.indicator} />}
                 <Text style={[styles.date, globalStyles.text]}>
                     {dayjs(item.date).fromNow()}
                 </Text>

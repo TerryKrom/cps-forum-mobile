@@ -4,7 +4,6 @@ import Markdown from "react-native-markdown-display";
 import dayjs from "dayjs";
 import { useNavigation } from "@react-navigation/native";
 import { Topic, User } from "../../../components/data/topic-data";
-import { Separator } from "../../../components/ui/separator";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Votecell from "../../../components/general/votecell";
 
@@ -12,10 +11,6 @@ export default function TopicView({ route }) {
     const { id } = route.params;
     const topic = Topic.find(topic => topic.id === id);  // Encontra o tópico
     const author = topic ? User.find(user => user.id === topic.userid) : null;  // Encontra o autor
-
-    useEffect(() => {
-        console.log('Received Params:', route.params);
-    }, [route.params]);
     
     const navigation = useNavigation();
     if (!topic || !author) {
@@ -47,12 +42,10 @@ export default function TopicView({ route }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <Separator style={styles.separator} />
             <View style={styles.mainContent}>
                 <Markdown style={styles.markdown}>{topic.text}</Markdown>
                 <Votecell votesAmount={topic.votes} />
             </View>
-            <Separator style={styles.separator} />
             <View style={styles.footer}>
                 <Text style={styles.footerText}>Postado por</Text>
                 <TouchableOpacity
@@ -70,7 +63,7 @@ export default function TopicView({ route }) {
 const styles = StyleSheet.create({
     container: {
         padding: 16,
-        backgroundColor: "white",
+        backgroundColor: "#fff",
         flexGrow: 1, // Garante que a tela ocupe a altura toda
     },
     header: {
