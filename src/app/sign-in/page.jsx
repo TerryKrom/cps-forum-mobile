@@ -26,7 +26,7 @@ export default function AuthenticationPage() {
                         </Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity onPress={() => signIn()}>
+                        <TouchableOpacity style={{backgroundColor: '#1098ff', paddingHorizontal: 25, paddingVertical: 10, borderRadius: 5}} onPress={() => signIn()}>
                             <Text style={{ color: '#fff', fontWeight: 'bold' }}>Entrar</Text>
                         </TouchableOpacity>
                     </View>

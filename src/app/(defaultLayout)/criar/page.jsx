@@ -11,7 +11,6 @@ import {
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import tags from '../../../components/data/tags';
 import { sectionlinks } from '../../../components/data/section-data';
 import { Picker } from '@react-native-picker/picker'; // Instale @react-native-picker/picker
 import { toast } from 'react-toastify';
@@ -70,7 +69,6 @@ const Criar = () => {
         toast.error('Erro ao criar tópico.');
       }
 
-      localStorage.clear();
     } catch (error) {
       console.error('Erro ao enviar o formulário:', error);
       toast.error('Erro na comunicação com o servidor.');
@@ -245,12 +243,14 @@ const styles = StyleSheet.create({
   picker: {
     height: 50,
     width: '100%',
-    borderWidth: 1,
-    borderColor: '#ccc',
+    borderWidth: 2,
+    borderColor: '#cccccc',
+    borderStyle: 'solid',
     padding: 10,
     borderRadius: 5,
     marginBottom: 5,
     fontFamily: 'Geist-200',
+    backgroundColor: '#ececec'
   },
   textArea: {
     height: 100,

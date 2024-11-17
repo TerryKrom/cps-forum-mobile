@@ -1,20 +1,19 @@
 import React, { useState, useRef } from 'react';
-import { Modal, StyleSheet, Text, Pressable, View, Animated } from 'react-native';
-import { Feather } from '@expo/vector-icons'; // Ícones do Expo
-import { Button } from '../../components/ui/button'; // Ajuste conforme necessário
-import { Logo } from '../../components/header/header'; // Ajuste a importação se necessário
-import LeftSidebar from './leftsidebar'; // Ajuste o caminho conforme necessário
+import { Modal, StyleSheet, Text, Pressable, View, Animated, ScrollView } from 'react-native';
+import { Feather } from '@expo/vector-icons'; 
+import { Button } from '../../components/ui/button'; 
+import { Logo } from '../../components/header/header'; 
+import LeftSidebar from './leftsidebar'; 
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 export default function MobileSidebar({ className, ...props }) {
-    // Controle de visibilidade do modal e animação
     const [modalVisible, setModalVisible] = useState(false);
-    const translateX = useRef(new Animated.Value(-1500)).current; // Inicializar fora da tela
+    const translateX = useRef(new Animated.Value(-1500)).current;
 
     const openModal = () => {
         setModalVisible(true);
         Animated.timing(translateX, {
-            toValue: 0, // Traz o modal para o centro da tela
+            toValue: 0,
             duration: 300,
             useNativeDriver: true,
         }).start();
@@ -22,7 +21,7 @@ export default function MobileSidebar({ className, ...props }) {
 
     const closeModal = () => {
         Animated.timing(translateX, {
-            toValue: -1500, // Volta para fora da tela
+            toValue: -1500,
             duration: 300,
             useNativeDriver: true,
         }).start(() => setModalVisible(false));
@@ -30,25 +29,29 @@ export default function MobileSidebar({ className, ...props }) {
 
     return (
         <View style={styles.container}>
-            {/* Botão de abrir o modal */}
             <Button onPress={openModal} variant="outline" size="icon" style={[styles.button, className]} {...props}>
                 <Feather name="menu" size={22} color="black" />
             </Button>
 
-            {/* Modal com animação de slide */}
             <Modal
                 transparent
                 visible={modalVisible}
-                animationType="none" // Desativa a animação padrão do Modal
+                animationType="none"
                 onRequestClose={closeModal}
             >
                 <View style={styles.overlay}>
                     <Animated.View style={[styles.modalView, { transform: [{ translateX }] }]}>
-                        <Logo style={styles.logo} />
-                        <LeftSidebar closeModal={closeModal} />
-                        <Pressable style={styles.buttonClose} onPress={closeModal}>
-                         <AntDesign name="close" size={24} color="black" />
-                        </Pressable>
+                        <ScrollView 
+                            contentContainerStyle={styles.scrollViewContainer}
+                            indicatorStyle="white" // Ajuste a cor e estilo da barra de rolagem
+                            showsVerticalScrollIndicator={true} // Exibe a barra de rolagem vertical
+                        >
+                            <Logo style={styles.logo} />
+                            <LeftSidebar closeModal={closeModal} />
+                            <Pressable style={styles.buttonClose} onPress={closeModal}>
+                                <AntDesign name="close" size={24} color="black" />
+                            </Pressable>
+                        </ScrollView>
                     </Animated.View>
                 </View>
             </Modal>
@@ -68,14 +71,14 @@ const styles = StyleSheet.create({
     },
     overlay: {
         flex: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fundo transparente escuro
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         justifyContent: 'center',
     },
     modalView: {
         backgroundColor: '#ffffff',
-        paddingHorizontal: 30,
+        paddingHorizontal: 20,
         paddingVertical: 0,
-        width: '75%', // Tela cheia
+        width: '75%',
         height: '100%',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -83,7 +86,10 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
         position: 'absolute',
-        overflow: 'scroll',
+    },
+    scrollViewContainer: {
+        flexGrow: 1,  // Isso garante que o conteúdo ocupe o espaço disponível
+        justifyContent: 'flex-start',  // Alinha o conteúdo para o início
     },
     logo: {
         width: 125,
@@ -99,7 +105,7 @@ const styles = StyleSheet.create({
         height: 20,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     textStyle: {
         color: '#555555',
