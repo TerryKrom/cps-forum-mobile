@@ -3,35 +3,34 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   TouchableOpacity,
   ScrollView,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { sectionlinks } from '../../../components/data/section-data';
 import { Picker } from '@react-native-picker/picker';
 import { toast } from 'react-toastify';
 
 // Schema de validação com Zod
 const formSchema = z.object({
-  title: z.string().min(10, { message: "O título deve ter no mínimo 10 caracteres." }).max(150),
+  title: z.string().min(10, { message: 'O título deve ter no mínimo 10 caracteres.' }).max(150),
   privacy: z.string(),
   section: z.string(),
-  body: z.string().min(20, { message: "O corpo do tópico deve ter no mínimo 20 caracteres." })
+  body: z.string().min(20, { message: 'O corpo do tópico deve ter no mínimo 20 caracteres.' }),
 });
 
 const Criar = () => {
   const { control, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      privacy: "public",
-      section: "",
-      body: ""
-    }
+      title: '',
+      privacy: 'public',
+      section: '',
+      body: '',
+    },
   });
 
   const [step, setStep] = useState(1);
@@ -49,7 +48,7 @@ const Criar = () => {
       privacy: privacy,
       section: section,
       body: body,
-      tag: "Tag Example"
+      tag: 'Tag Example',
     };
 
     try {
@@ -68,7 +67,6 @@ const Criar = () => {
       } else {
         toast.error('Erro ao criar tópico.');
       }
-
     } catch (error) {
       console.error('Erro ao enviar o formulário:', error);
       toast.error('Erro na comunicação com o servidor.');
@@ -77,13 +75,13 @@ const Criar = () => {
 
   const handleTags = (tag) => {
     if (tag && !selectedTags.includes(tag) && selectedTags.length < 6) {
-      setSelectedTags(prevTags => [...prevTags, tag]);
+      setSelectedTags((prevTags) => [...prevTags, tag]);
     }
     setInputTag('');
   };
 
   const removeTag = (tagToRemove) => {
-    setSelectedTags(prevTags => prevTags.filter(tag => tag !== tagToRemove));
+    setSelectedTags((prevTags) => prevTags.filter((tag) => tag !== tagToRemove));
   };
 
   return (
@@ -107,7 +105,9 @@ const Criar = () => {
         />
         {errors.title && <Text style={styles.error}>{errors.title.message}</Text>}
         {step === 1 && (
-          <Button title="Próximo" onPress={() => setStep(step + 1)} />
+          <TouchableOpacity style={styles.button} onPress={() => setStep(step + 1)}>
+            <Text style={styles.buttonText}>Próximo</Text>
+          </TouchableOpacity>
         )}
       </View>
 
@@ -119,18 +119,18 @@ const Criar = () => {
             control={control}
             name="privacy"
             render={({ field: { onChange, value } }) => (
-              <Picker
-                selectedValue={value}
-                onValueChange={onChange}
-                style={styles.picker}
-              >
+              <Picker selectedValue={value} onValueChange={onChange} style={styles.picker}>
                 <Picker.Item label="Público" value="public" />
                 <Picker.Item label="Minha instituição" value="institution" />
                 <Picker.Item label="Privado" value="private" />
               </Picker>
             )}
           />
-          {step === 2 && <Button title="Próximo" onPress={() => setStep(step + 1)} />}
+          {step === 2 && (
+            <TouchableOpacity style={styles.button} onPress={() => setStep(step + 1)}>
+              <Text style={styles.buttonText}>Próximo</Text>
+            </TouchableOpacity>
+          )}
         </View>
       )}
 
@@ -142,18 +142,18 @@ const Criar = () => {
             control={control}
             name="section"
             render={({ field: { onChange, value } }) => (
-              <Picker
-                selectedValue={value}
-                onValueChange={onChange}
-                style={styles.picker}
-              >
+              <Picker selectedValue={value} onValueChange={onChange} style={styles.picker}>
                 {sectionlinks.slice(1).map((section, index) => (
                   <Picker.Item key={index} label={section.title} value={section.slug} />
                 ))}
               </Picker>
             )}
           />
-          {step === 3 && <Button title="Próximo" onPress={() => setStep(step + 1)} />}
+          {step === 3 && (
+            <TouchableOpacity style={styles.button} onPress={() => setStep(step + 1)}>
+              <Text style={styles.buttonText}>Próximo</Text>
+            </TouchableOpacity>
+          )}
         </View>
       )}
 
@@ -175,9 +175,14 @@ const Criar = () => {
             onChangeText={setInputTag}
             onSubmitEditing={() => handleTags(inputTag)}
           />
-          <Button title="Adicionar tag" onPress={() => handleTags(inputTag)} />
-            <View style={{marginBottom: 20}}></View>
-          {step === 4 && <Button title="Próximo" onPress={() => setStep(step + 1)} />}
+          <TouchableOpacity style={styles.button} onPress={() => handleTags(inputTag)}>
+            <Text style={styles.buttonText}>Adicionar Tag</Text>
+          </TouchableOpacity>
+          {step === 4 && (
+            <TouchableOpacity style={styles.button} onPress={() => setStep(step + 1)}>
+              <Text style={styles.buttonText}>Próximo</Text>
+            </TouchableOpacity>
+          )}
         </View>
       )}
 
@@ -202,11 +207,13 @@ const Criar = () => {
         </View>
       )}
 
-      <Button
-        title="Criar tópico"
+      <TouchableOpacity
+        style={[styles.button, step < 5 && { backgroundColor: '#ccc' }]}
         onPress={handleSubmit(onSubmit)}
         disabled={step < 5}
-      />
+      >
+        <Text style={styles.buttonText}>Criar Tópico</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -215,18 +222,16 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     backgroundColor: '#ffffff',
-    height: '100%'
+    height: '100%',
   },
   header: {
     fontSize: 24,
     marginBottom: 20,
     textAlign: 'left',
-    fontFamily: 'Geist-200',
-    fontWeight: 900
+    fontWeight: 'bold',
   },
   formGroup: {
     marginBottom: 20,
-    backgroundColor: '#fff'
   },
   label: {
     fontSize: 16,
@@ -238,23 +243,16 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginBottom: 5,
-    fontFamily: 'Geist-200',
   },
   picker: {
     height: 50,
     width: '100%',
-    borderWidth: 2,
-    borderColor: '#cccccc',
-    borderStyle: 'solid',
-    padding: 10,
     borderRadius: 5,
+    backgroundColor: '#ececec',
     marginBottom: 5,
-    fontFamily: 'Geist-200',
-    backgroundColor: '#ececec'
   },
   textArea: {
     height: 100,
-    fontFamily: 'Geist-Mono',
   },
   error: {
     color: '#ff0000',
@@ -265,7 +263,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   tag: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#4594ff',
     padding: 5,
     borderRadius: 5,
     marginRight: 5,
@@ -273,6 +271,19 @@ const styles = StyleSheet.create({
   },
   tagText: {
     color: '#ffffff',
+  },
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    backgroundColor: '#4594ff',
+    borderRadius: 5,
+    alignItems: 'center',
+    marginVertical: 5,
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
