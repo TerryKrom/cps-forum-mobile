@@ -32,7 +32,7 @@ export default function MobileSidebar({ className, ...props }) {
         <View style={styles.container}>
             {/* Botão de abrir o modal */}
             <Button onPress={openModal} variant="outline" size="icon" style={[styles.button, className]} {...props}>
-                <Feather name="menu" size={20} color="black" />
+                <Feather name="menu" size={22} color="black" />
             </Button>
 
             {/* Modal com animação de slide */}
@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     button: {
         borderRadius: 5,
         backgroundColor: 'transparent',
-        border: 'none',
+        width: 100,
+        borderWidth: 0,
     },
     overlay: {
         flex: 1,
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     modalView: {
-        backgroundColor: 'white',
+        backgroundColor: '#ffffff',
         paddingHorizontal: 30,
         paddingVertical: 0,
         width: '75%', // Tela cheia

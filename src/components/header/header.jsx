@@ -11,7 +11,7 @@ export const Logo = () => {
     // const logoSource = colors.dark ?  : require('../../../assets/logo-black.svg'); // Ajuste o caminho
 
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity style={styles.containerLogo} onPress={() => navigation.navigate('Home')}>
             <Image source={require('../../../assets/logo-black.png')} style={styles.logo} />
         </TouchableOpacity>
     );
@@ -39,11 +39,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal: 16,
+        paddingHorizontal: 15,
+        marginTop: 15,
     },
     leftHeader: {
+        display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-around',
+        width: 175
     },
     rightHeader: {
         flexDirection: 'row',
@@ -58,6 +62,9 @@ const styles = StyleSheet.create({
     },
     logo: {
         height: 75, width: 125
+    },
+    containerLogo: {
+      
     }
 });
 
