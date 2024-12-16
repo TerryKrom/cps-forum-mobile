@@ -138,5 +138,3 @@ Este projeto tem como objetivo a migração de uma aplicação originalmente des
 A migração de Next.js para React Native foi um sucesso, permitindo que o projeto evoluísse para um ambiente mobile nativo. Com a colaboração de uma equipe dedicada, garantimos uma aplicação robusta, funcional e bem documentada.  
 
 --- 
-
-Se precisar de mais ajustes ou complementos, é só avisar! 😊
